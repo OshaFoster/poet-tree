@@ -7,22 +7,24 @@
  *
  */
 
-import React from 'react';
-import { Switch, Route } from 'react-router-dom';
+import React from 'react'
+import { Switch, Route } from 'react-router-dom'
 
-import HomePage from 'containers/HomePage/Loadable';
-import NotFoundPage from 'containers/NotFoundPage/Loadable';
+import LandingPage from 'containers/LandingPage'
+import NotFoundPage from 'containers/NotFoundPage/Loadable'
 
-import GlobalStyle from '../../global-styles';
+import GlobalStyle from '../../global-styles'
 
-export default function App() {
-  return (
-    <div>
-      <Switch>
-        <Route exact path="/" component={HomePage} />
-        <Route component={NotFoundPage} />
-      </Switch>
-      <GlobalStyle />
-    </div>
-  );
+export default class App extends React.Component { // eslint-disable-line
+  render() {
+    return (
+      <div>
+        <Switch>
+          <Route exact path="/" component={LandingPage} />
+          <Route component={NotFoundPage} />
+        </Switch>
+        <GlobalStyle />
+      </div>
+    )
+  }
 }
