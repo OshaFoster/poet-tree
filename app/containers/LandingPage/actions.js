@@ -4,7 +4,7 @@
  *
  */
 
-import { DEFAULT_ACTION, TEST_CALL } from './constants'
+import { DEFAULT_ACTION, TEST_CALL, SAVE_FILLERS } from './constants'
 
 export function defaultAction() {
   return {
@@ -13,8 +13,14 @@ export function defaultAction() {
 }
 
 export function testAction() {
-  console.log('in test action')
   return {
     type: TEST_CALL,
+  }
+}
+
+export function saveFillers(payload) {
+  return {
+    type: SAVE_FILLERS,
+    payload,
   }
 }

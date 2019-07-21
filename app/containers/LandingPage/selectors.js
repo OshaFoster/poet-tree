@@ -11,6 +11,12 @@ const selectLandingPageDomain = state => state.landingPage || initialState
  * Other specific selectors
  */
 
+const selectFillers = () =>
+  createSelector(
+    selectLandingPageDomain,
+    landingPageState => landingPageState.fillers,
+  )
+
 /**
  * Default selector used by LandingPage
  */
@@ -22,4 +28,4 @@ const makeSelectLandingPage = () =>
   )
 
 export default makeSelectLandingPage
-export { selectLandingPageDomain }
+export { selectLandingPageDomain, selectFillers }

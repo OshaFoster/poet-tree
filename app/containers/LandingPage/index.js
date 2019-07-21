@@ -13,7 +13,7 @@ import { compose } from 'redux'
 
 import { useInjectSaga } from 'utils/injectSaga'
 import { useInjectReducer } from 'utils/injectReducer'
-import makeSelectLandingPage from './selectors'
+import makeSelectLandingPage, { selectFillers } from './selectors'
 import reducer from './reducer'
 import saga from './saga'
 import { testAction } from './actions'
@@ -23,7 +23,7 @@ export function LandingPage(props) {
   useInjectSaga({ key: 'landingPage', saga })
 
   useEffect(() => {
-    console.log('in use effect')
+    // figure out how to not create loop
     props.dispatch(testAction())
   })
   return (
@@ -38,10 +38,13 @@ export function LandingPage(props) {
 
 LandingPage.propTypes = {
   dispatch: PropTypes.func.isRequired,
+  // landingPage: PropTypes.object,
+  // fillers: PropTypes.object,
 }
 
 const mapStateToProps = createStructuredSelector({
   landingPage: makeSelectLandingPage(),
+  fillers: selectFillers(),
 })
 
 function mapDispatchToProps(dispatch) {
