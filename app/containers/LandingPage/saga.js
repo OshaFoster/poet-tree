@@ -1,20 +1,7 @@
-import firebase from 'firebase/app'
-import '@firebase/firestore'
-import { takeLatest, call, put } from 'redux-saga/effects'
+import { takeLatest, call } from 'redux-saga/effects'
+import { db } from 'components/Initialize'
 
 import { TEST_CALL } from './constants'
-
-firebase.initializeApp({
-  apiKey: 'AIzaSyBBcpAywBVDPhG-4vehBvIbHPtpkeQNnIU',
-  authDomain: 'poet-tree.firebaseapp.com',
-  databaseURL: 'https://poet-tree.firebaseio.com',
-  projectId: 'poet-tree',
-  storageBucket: 'poet-tree.appspot.com',
-  messagingSenderId: '721416476712',
-  appId: '1:721416476712:web:2679f51b047f4d87',
-})
-
-const db = firebase.firestore()
 
 // Individual exports for testing
 export function* landingPageSaga() {
