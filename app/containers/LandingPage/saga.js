@@ -9,7 +9,7 @@ export function* makeTestCall() {
     let fillersData = {}
     const fillers = yield call(() =>
       db
-        .collection('fillers')
+        .collection('words')
         .get()
         .then(querySnapshot => {
           querySnapshot.forEach(doc => {
