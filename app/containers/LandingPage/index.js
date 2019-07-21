@@ -22,10 +22,20 @@ export function LandingPage(props) {
   useInjectReducer({ key: 'landingPage', reducer })
   useInjectSaga({ key: 'landingPage', saga })
 
+  const useMountEffect = () => {
+    useEffect(() => {
+      // include anything that only needs to run on mount in here
+      props.dispatch(testAction())
+    }, [])
+  }
+
+  useMountEffect()
   useEffect(() => {
-    // figure out how to not create loop
-    props.dispatch(testAction())
+    console.log('mounted or updating')
   })
+
+  console.log(props.fillers)
+
   return (
     <div>
       <Helmet>
@@ -39,7 +49,7 @@ export function LandingPage(props) {
 LandingPage.propTypes = {
   dispatch: PropTypes.func.isRequired,
   // landingPage: PropTypes.object,
-  // fillers: PropTypes.object,
+  fillers: PropTypes.object,
 }
 
 const mapStateToProps = createStructuredSelector({

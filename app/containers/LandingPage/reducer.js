@@ -6,7 +6,11 @@
 import produce from 'immer'
 import { DEFAULT_ACTION, SAVE_FILLERS } from './constants'
 
-export const initialState = {}
+export const initialState = {
+  fillers: {
+    words: [],
+  },
+}
 
 /* eslint-disable default-case, no-param-reassign */
 const landingPageReducer = (state = initialState, action) =>
