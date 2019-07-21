@@ -5,7 +5,7 @@
  */
 
 import React, { useEffect } from 'react'
-// import PropTypes from 'prop-types'
+import PropTypes from 'prop-types'
 import { connect } from 'react-redux'
 import { Helmet } from 'react-helmet'
 import { createStructuredSelector } from 'reselect'
@@ -18,12 +18,13 @@ import reducer from './reducer'
 import saga from './saga'
 import { testAction } from './actions'
 
-export function LandingPage() {
+export function LandingPage(props) {
   useInjectReducer({ key: 'landingPage', reducer })
   useInjectSaga({ key: 'landingPage', saga })
+
   useEffect(() => {
     console.log('in use effect')
-    testAction()
+    props.dispatch(testAction())
   })
   return (
     <div>
@@ -36,7 +37,7 @@ export function LandingPage() {
 }
 
 LandingPage.propTypes = {
-  // dispatch: PropTypes.func.isRequired,
+  dispatch: PropTypes.func.isRequired,
 }
 
 const mapStateToProps = createStructuredSelector({

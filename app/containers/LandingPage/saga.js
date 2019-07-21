@@ -1,11 +1,10 @@
-import firebase from 'firebase'
+import firebase from 'firebase/app'
 import '@firebase/firestore'
-import ReduxSagaFirebase from 'redux-saga-firebase'
-import { takeLatest, call } from 'redux-saga/effects'
+import { takeLatest, call, put } from 'redux-saga/effects'
 
 import { TEST_CALL } from './constants'
 
-const myFirebaseApp = firebase.initializeApp({
+firebase.initializeApp({
   apiKey: 'AIzaSyBBcpAywBVDPhG-4vehBvIbHPtpkeQNnIU',
   authDomain: 'poet-tree.firebaseapp.com',
   databaseURL: 'https://poet-tree.firebaseio.com',
@@ -15,7 +14,7 @@ const myFirebaseApp = firebase.initializeApp({
   appId: '1:721416476712:web:2679f51b047f4d87',
 })
 
-const rsf = new ReduxSagaFirebase(myFirebaseApp)
+const db = firebase.firestore()
 
 // Individual exports for testing
 export function* landingPageSaga() {
@@ -24,16 +23,25 @@ export function* landingPageSaga() {
 
 export function* makeTestCall() {
   // See example in containers/HomePage/saga.js
-  console.log('in saga')
-  // try {
-  //   const doc = yield call(rsf.firestore.getCollection('fillers'))
-  //   console.log(doc)
-  // } catch (err) {
-  //   console.log(err)
-  // }
+  console.log('in makeTestCall')
+  try {
+    const fillers = yield call(
+      db
+        .collection('fillers')
+        .get()
+        .then(querySnapshot => {
+          querySnapshot.forEach(doc => {
+            console.log(doc.data())
+          })
+        }),
+    )
+    // yield put(saveData(fillers))
+  } catch (err) {
+    console.log(err)
+  }
 }
 
 export default function* defaultSaga() {
-  console.log('in here')
+  console.log('in defaultSaga')
   yield takeLatest(TEST_CALL, makeTestCall)
 }
